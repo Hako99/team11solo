@@ -15,6 +15,7 @@ public class BookingCustomersResponseDto {
   // 예약 시간
   private Long ticketNumber;
   private Long userId;
+  private Long bookingId;
   private BookingType state;
   private Integer party;
   private LocalDateTime createdAt;
@@ -22,6 +23,7 @@ public class BookingCustomersResponseDto {
   public BookingCustomersResponseDto(Booking booking){
     this.ticketNumber = booking.getTicketNumber();
     this.userId = booking.getUserId();
+    this.bookingId = booking.getId();
     this.state = booking.getState();
     this.party = booking.getParty();
     this.createdAt = booking.getCreatedAt();
