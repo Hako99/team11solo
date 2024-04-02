@@ -18,18 +18,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Shop extends Timestamp {
-  // 가게에 추가할 내용
-  /*
-  가게 번호 (id)
-  이름
-  설명
-  주소
-  지역구
-  전화번호
-  오픈시간
-  종료시간
-  */
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "shop_id", nullable = false)
@@ -60,8 +48,8 @@ public class Shop extends Timestamp {
         shopCreateRequestDto.getPhoneFirst() + "-" + shopCreateRequestDto.getPhoneSecond() + "-"
             + shopCreateRequestDto.getPhoneThird();
     this.introduce = shopCreateRequestDto.getIntroduce();
-    this.openTime = Time.valueOf(shopCreateRequestDto.getOpenTimeHour()+":"+shopCreateRequestDto.getOpenTimeMinute());
-    this.closeTime = Time.valueOf(shopCreateRequestDto.getCloseTimeHour()+":"+shopCreateRequestDto.getCloseTimeMinute());
+    this.openTime = Time.valueOf(shopCreateRequestDto.getOpenTimeHour()+":"+shopCreateRequestDto.getOpenTimeMinute()+":00");
+    this.closeTime = Time.valueOf(shopCreateRequestDto.getCloseTimeHour()+":"+shopCreateRequestDto.getCloseTimeMinute()+":00");
   }
 
 
