@@ -52,4 +52,8 @@ public class Booking extends Timestamp {
     this.state = BookingType.WAITING;
     this.ticketNumber = maxTicketNumber+1L;
   }
+
+  public void collingCustomer() {
+    this.state = BookingType.COLLING;
+  }
 }
