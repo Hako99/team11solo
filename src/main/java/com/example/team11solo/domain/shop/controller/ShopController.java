@@ -3,6 +3,7 @@ package com.example.team11solo.domain.shop.controller;
 import com.example.team11solo.domain.shop.dto.request.ShopCreateRequestDto;
 import com.example.team11solo.domain.shop.dto.request.ShopSearchRequestDto;
 import com.example.team11solo.domain.shop.dto.request.ShopUpdateRequestDto;
+import com.example.team11solo.domain.shop.dto.response.ShopResponseDto;
 import com.example.team11solo.domain.shop.dto.response.ShopSearchResponseDto;
 import com.example.team11solo.domain.shop.service.ShopService;
 import com.example.team11solo.global.dto.ResponseDto;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,6 +48,16 @@ public class ShopController {
         .statusCode(HttpStatus.OK.value())
         .data(shopService.searchShop(shopSearchRequestDto))
         .build());
+  }
+
+  // 가게 단일 검색
+  @GetMapping("/{shopId}")
+  public ResponseEntity<ResponseDto<ShopResponseDto>> viewShop(
+      @PathVariable Long shopId
+  ){   return ResponseEntity.ok().body(ResponseDto.<ShopResponseDto>builder()
+      .statusCode(HttpStatus.OK.value())
+      .data(shopService.viewShop(shopId))
+      .build());
   }
 
 

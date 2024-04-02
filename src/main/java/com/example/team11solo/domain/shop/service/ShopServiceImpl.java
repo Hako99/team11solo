@@ -3,14 +3,11 @@ package com.example.team11solo.domain.shop.service;
 import com.example.team11solo.domain.shop.dto.request.ShopCreateRequestDto;
 import com.example.team11solo.domain.shop.dto.request.ShopSearchRequestDto;
 import com.example.team11solo.domain.shop.dto.request.ShopUpdateRequestDto;
+import com.example.team11solo.domain.shop.dto.response.ShopResponseDto;
 import com.example.team11solo.domain.shop.dto.response.ShopSearchResponseDto;
 import com.example.team11solo.domain.shop.entity.Shop;
 import com.example.team11solo.domain.shop.repository.ShopRepository;
-import jakarta.persistence.Entity;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +39,13 @@ public class ShopServiceImpl implements ShopService {
     List<Shop> shopList = shopRepository.searchShop(shopSearchRequestDto.getSearch());
     return shopList.stream().map(ShopSearchResponseDto::new).toList();
 
+  }
+
+  @Override
+  public ShopResponseDto viewShop(Long shopId) {
+    Shop shop = shopRepository.findById(shopId)
+        .orElseThrow(() -> new NullPointerException("등록되어있지 않은 가게 입니다."));
+    return new ShopResponseDto(shop);
   }
 
 
