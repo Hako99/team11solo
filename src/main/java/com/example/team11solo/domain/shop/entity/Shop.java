@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.sql.Time;
-import java.time.LocalTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Shop extends Timestamp {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "shop_id", nullable = false)
@@ -49,20 +49,46 @@ public class Shop extends Timestamp {
         shopCreateRequestDto.getPhoneFirst() + "-" + shopCreateRequestDto.getPhoneSecond() + "-"
             + shopCreateRequestDto.getPhoneThird();
     this.introduce = shopCreateRequestDto.getIntroduce();
-    this.openTime = Time.valueOf(shopCreateRequestDto.getOpenTimeHour()+":"+shopCreateRequestDto.getOpenTimeMinute()+":00");
-    this.closeTime = Time.valueOf(shopCreateRequestDto.getCloseTimeHour()+":"+shopCreateRequestDto.getCloseTimeMinute()+":00");
+    this.openTime = Time.valueOf(
+        shopCreateRequestDto.getOpenTimeHour() + ":" + shopCreateRequestDto.getOpenTimeMinute()
+            + ":00");
+    this.closeTime = Time.valueOf(
+        shopCreateRequestDto.getCloseTimeHour() + ":" + shopCreateRequestDto.getCloseTimeMinute()
+            + ":00");
   }
 
 
   public void updateShop(ShopUpdateRequestDto shopUpdateRequestDto) {
-    this.name = shopUpdateRequestDto.getName();
-    this.address = shopUpdateRequestDto.getAddress();
-    this.city = shopUpdateRequestDto.getCity();
-    this.phone =
-        shopUpdateRequestDto.getPhoneFirst() + "-" + shopUpdateRequestDto.getPhoneSecond() + "-"
-            + shopUpdateRequestDto.getPhoneThird();
-    this.introduce = shopUpdateRequestDto.getIntroduce();
-    this.openTime = Time.valueOf(shopUpdateRequestDto.getOpenTimeHour()+":"+shopUpdateRequestDto.getOpenTimeMinute()+":00");
-    this.closeTime = Time.valueOf(shopUpdateRequestDto.getCloseTimeHour()+":"+shopUpdateRequestDto.getCloseTimeMinute()+":00");
+    if (shopUpdateRequestDto.getName() != null) {
+      this.name = shopUpdateRequestDto.getName();
+    }
+    if (shopUpdateRequestDto.getAddress() != null) {
+      this.address = shopUpdateRequestDto.getAddress();
+    }
+    if (shopUpdateRequestDto.getCity() != null) {
+      this.city = shopUpdateRequestDto.getCity();
+    }
+    if (shopUpdateRequestDto.getPhoneFirst() != null
+        && shopUpdateRequestDto.getPhoneSecond() != null
+        && shopUpdateRequestDto.getPhoneThird() != null) {
+      this.phone =
+          shopUpdateRequestDto.getPhoneFirst() + "-" + shopUpdateRequestDto.getPhoneSecond() + "-"
+              + shopUpdateRequestDto.getPhoneThird();
+    }
+    if (shopUpdateRequestDto.getIntroduce() != null) {
+      this.introduce = shopUpdateRequestDto.getIntroduce();
+    }
+    if (shopUpdateRequestDto.getOpenTimeHour() != null
+        && shopUpdateRequestDto.getOpenTimeMinute() != null) {
+      this.openTime = Time.valueOf(
+          shopUpdateRequestDto.getOpenTimeHour() + ":" + shopUpdateRequestDto.getOpenTimeMinute()
+              + ":00");
+    }
+    if (shopUpdateRequestDto.getCloseTimeHour() != null
+        && shopUpdateRequestDto.getCloseTimeMinute() != null) {
+      this.closeTime = Time.valueOf(
+          shopUpdateRequestDto.getCloseTimeHour() + ":" + shopUpdateRequestDto.getCloseTimeMinute()
+              + ":00");
+    }
   }
 }

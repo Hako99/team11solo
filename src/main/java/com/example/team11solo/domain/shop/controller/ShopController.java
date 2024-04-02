@@ -27,7 +27,7 @@ public class ShopController {
   }
 
   // 가게 수정
-  @PatchMapping
+  @PutMapping
   public void updateShop(
       @RequestBody ShopUpdateRequestDto shopUpdateRequestDto) {
     shopService.updateShop(shopUpdateRequestDto);

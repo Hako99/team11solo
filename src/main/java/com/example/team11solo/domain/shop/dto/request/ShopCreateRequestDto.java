@@ -1,5 +1,6 @@
 package com.example.team11solo.domain.shop.dto.request;
 
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 
 @Getter
@@ -8,12 +9,19 @@ public class ShopCreateRequestDto {
   private String name;
   private String address;
   private String city;
-  private int phoneFirst;
-  private int phoneSecond;
-  private int phoneThird;
+  @Pattern(regexp = "^[0-9]*$")
+  private String phoneFirst;
+  @Pattern(regexp = "^[0-9]*$")
+  private String phoneSecond;
+  @Pattern(regexp = "^[0-9]*$")
+  private String phoneThird;
   private String introduce;
-  private int openTimeHour;
-  private int openTimeMinute;
-  private int closeTimeHour;
-  private int closeTimeMinute;
+  @Pattern(regexp = "^[0-9]*$")
+  private String openTimeHour;
+  @Pattern(regexp = "^[0-9]*$")
+  private String openTimeMinute;
+  @Pattern(regexp = "^[0-9]*$")
+  private String closeTimeHour;
+  @Pattern(regexp = "^[0-9]*$")
+  private String closeTimeMinute;
 }
