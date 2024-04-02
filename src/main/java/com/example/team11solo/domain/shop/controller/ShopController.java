@@ -1,12 +1,16 @@
 package com.example.team11solo.domain.shop.controller;
 
 import com.example.team11solo.domain.shop.dto.request.ShopCreateRequestDto;
+import com.example.team11solo.domain.shop.dto.request.ShopSearchRequestDto;
 import com.example.team11solo.domain.shop.dto.request.ShopUpdateRequestDto;
+import com.example.team11solo.domain.shop.dto.response.ShopSearchResponseDto;
 import com.example.team11solo.domain.shop.service.ShopService;
+import com.example.team11solo.global.dto.ResponseDto;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/shops")
 public class ShopController {
+
   private final ShopService shopService;
 
   // 가게 등록
@@ -32,5 +37,16 @@ public class ShopController {
       @RequestBody ShopUpdateRequestDto shopUpdateRequestDto) {
     shopService.updateShop(shopUpdateRequestDto);
   }
+
+  // 가게 검색
+  @GetMapping
+  public ResponseEntity<ResponseDto<List<ShopSearchResponseDto>>> searchShop(
+      @RequestBody ShopSearchRequestDto shopSearchRequestDto) {
+    return ResponseEntity.ok().body(ResponseDto.<List<ShopSearchResponseDto>>builder()
+        .statusCode(HttpStatus.OK.value())
+        .data(shopService.searchShop(shopSearchRequestDto))
+        .build());
+  }
+
 
 }

@@ -1,10 +1,13 @@
 package com.example.team11solo.domain.shop.service;
 
 import com.example.team11solo.domain.shop.dto.request.ShopCreateRequestDto;
+import com.example.team11solo.domain.shop.dto.request.ShopSearchRequestDto;
 import com.example.team11solo.domain.shop.dto.request.ShopUpdateRequestDto;
+import com.example.team11solo.domain.shop.dto.response.ShopSearchResponseDto;
 import com.example.team11solo.domain.shop.entity.Shop;
 import com.example.team11solo.domain.shop.repository.ShopRepository;
 import jakarta.persistence.Entity;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,8 +35,15 @@ public class ShopServiceImpl implements ShopService {
     Shop shop = shopRepository.findById(shopUpdateRequestDto.getShopId())
         .orElseThrow(() -> new NullPointerException("등록되어있지 않은 가게 입니다."));
     shop.updateShop(shopUpdateRequestDto);
+  }
+
+  @Override
+  public List<ShopSearchResponseDto> searchShop(ShopSearchRequestDto shopSearchRequestDto) {
+    List<Shop> shopList = shopRepository.searchShop(shopSearchRequestDto.getSearch());
+    return shopList.stream().map(ShopSearchResponseDto::new).toList();
 
   }
+
 
 
 }
