@@ -12,11 +12,16 @@ import java.sql.Time;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@SQLDelete(sql = "UPDATE Shop SET deleted_at = NOW() WHERE shop_id = ?")
+@SQLRestriction(value = "deleted_at is NULL")
 public class Shop extends Timestamp {
 
   @Id
