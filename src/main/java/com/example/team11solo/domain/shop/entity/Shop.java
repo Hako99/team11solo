@@ -37,6 +37,8 @@ public class Shop extends Timestamp {
   private Time openTime;
   @Column(name = "shop_closetime", nullable = false)
   private Time closeTime;
+  @Column(name = "shop_keyword", nullable = true)
+  private String keyword;
 
 
 
@@ -55,6 +57,7 @@ public class Shop extends Timestamp {
     this.closeTime = Time.valueOf(
         shopCreateRequestDto.getCloseTimeHour() + ":" + shopCreateRequestDto.getCloseTimeMinute()
             + ":00");
+    this.keyword = shopCreateRequestDto.getKeyword();
   }
 
 
@@ -89,6 +92,9 @@ public class Shop extends Timestamp {
       this.closeTime = Time.valueOf(
           shopUpdateRequestDto.getCloseTimeHour() + ":" + shopUpdateRequestDto.getCloseTimeMinute()
               + ":00");
+    }
+    if (shopUpdateRequestDto.getKeyword() != null){
+      this.keyword = shopUpdateRequestDto.getKeyword();
     }
   }
 }

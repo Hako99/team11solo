@@ -24,4 +24,5 @@ public class ShopUpdateRequestDto {
   private String closeTimeHour;
   @Pattern(regexp = "^[0-9]*$")
   private String closeTimeMinute;
+  private String keyword;
 }
