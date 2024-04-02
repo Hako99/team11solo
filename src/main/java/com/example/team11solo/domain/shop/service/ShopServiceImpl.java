@@ -1,6 +1,7 @@
 package com.example.team11solo.domain.shop.service;
 
 import com.example.team11solo.domain.shop.dto.request.ShopCreateRequestDto;
+import com.example.team11solo.domain.shop.dto.request.ShopUpdateRequestDto;
 import com.example.team11solo.domain.shop.entity.Shop;
 import com.example.team11solo.domain.shop.repository.ShopRepository;
 import jakarta.persistence.Entity;
@@ -25,4 +26,14 @@ public class ShopServiceImpl implements ShopService {
     shopRepository.save(shop);
 
   }
+
+  @Override
+  public void updateShop(ShopUpdateRequestDto shopUpdateRequestDto) {
+    Shop shop = shopRepository.findById(shopUpdateRequestDto.getShopId())
+        .orElseThrow(() -> new NullPointerException("등록되어있지 않은 가게 입니다."));
+    shop.updateShop(shopUpdateRequestDto);
+
+  }
+
+
 }

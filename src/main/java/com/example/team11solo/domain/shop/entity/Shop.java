@@ -1,6 +1,7 @@
 package com.example.team11solo.domain.shop.entity;
 
 import com.example.team11solo.domain.shop.dto.request.ShopCreateRequestDto;
+import com.example.team11solo.domain.shop.dto.request.ShopUpdateRequestDto;
 import com.example.team11solo.global.util.Timestamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -53,4 +54,15 @@ public class Shop extends Timestamp {
   }
 
 
+  public void updateShop(ShopUpdateRequestDto shopUpdateRequestDto) {
+    this.name = shopUpdateRequestDto.getName();
+    this.address = shopUpdateRequestDto.getAddress();
+    this.city = shopUpdateRequestDto.getCity();
+    this.phone =
+        shopUpdateRequestDto.getPhoneFirst() + "-" + shopUpdateRequestDto.getPhoneSecond() + "-"
+            + shopUpdateRequestDto.getPhoneThird();
+    this.introduce = shopUpdateRequestDto.getIntroduce();
+    this.openTime = Time.valueOf(shopUpdateRequestDto.getOpenTimeHour()+":"+shopUpdateRequestDto.getOpenTimeMinute()+":00");
+    this.closeTime = Time.valueOf(shopUpdateRequestDto.getCloseTimeHour()+":"+shopUpdateRequestDto.getCloseTimeMinute()+":00");
+  }
 }
