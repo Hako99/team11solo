@@ -7,6 +7,7 @@ import com.example.team11solo.domain.shop.dto.response.ShopResponseDto;
 import com.example.team11solo.domain.shop.dto.response.ShopSearchResponseDto;
 import com.example.team11solo.domain.shop.entity.Shop;
 import com.example.team11solo.domain.shop.repository.ShopRepository;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,7 @@ public class ShopServiceImpl implements ShopService {
 
   @Override
   public void updateShop(ShopUpdateRequestDto shopUpdateRequestDto) {
-    Shop shop = shopRepository.findById(shopUpdateRequestDto.getShopId())
-        .orElseThrow(() -> new NullPointerException("등록되어있지 않은 가게 입니다."));
+    Shop shop = findShop(shopUpdateRequestDto.getShopId());
     shop.updateShop(shopUpdateRequestDto);
   }
 
@@ -43,9 +43,19 @@ public class ShopServiceImpl implements ShopService {
 
   @Override
   public ShopResponseDto viewShop(Long shopId) {
-    Shop shop = shopRepository.findById(shopId)
-        .orElseThrow(() -> new NullPointerException("등록되어있지 않은 가게 입니다."));
+    Shop shop = findShop(shopId);
     return new ShopResponseDto(shop);
+  }
+
+  @Override
+  public void deleteShop(Long shopId) {
+    Shop shop = findShop(shopId);
+    shopRepository.delete(shop);
+  }
+
+  public Shop findShop(Long shopId) {
+    return shopRepository.findById(shopId)
+        .orElseThrow(() -> new EntityNotFoundException("등록되어있지 않은 가게 입니다."));
   }
 
 

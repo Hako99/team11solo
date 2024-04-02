@@ -17,4 +17,7 @@ public interface ShopService {
   List<ShopSearchResponseDto> searchShop(ShopSearchRequestDto shopSearchRequestDto);
 
   ShopResponseDto viewShop(Long shopId);
+
+  void deleteShop(Long shopId);
+
 }
