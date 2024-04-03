@@ -66,4 +66,12 @@ public class CustomerServiceImpl implements CustomerService {
             booking.getUserId() + "번 손님이 입장완료 되었습니다.");
     alarmService.alarmClose(booking.getUserId());
   }
+
+  @Override
+  public void wellDoneCustomer(Long userId) {
+    Booking booking = bookingRepository.findDoneByUserId(userId);
+    booking.wellDone();
+    bookingRepository.saveAndFlush(booking);
+    bookingRepository.delete(booking);
+  }
 }

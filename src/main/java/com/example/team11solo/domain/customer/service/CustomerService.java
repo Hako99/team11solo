@@ -15,4 +15,5 @@ public interface CustomerService {
   void noShowCustomer(NoShowEventRequestDto noShowEventRequestDto);
 
   void doneCustomer (Long userId);
+  void wellDoneCustomer (Long userId);
 }
