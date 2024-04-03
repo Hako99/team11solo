@@ -59,7 +59,7 @@ public class CustomerController {
   }
 
   // 손님 퇴장
-  @DeleteMapping("/{userId}")
+  @PostMapping("/{userId}")
   public ResponseEntity<ResponseDto<Void>> wellDoneCustomer(
       @PathVariable Long userId
   ){
