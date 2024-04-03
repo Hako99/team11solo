@@ -11,4 +11,6 @@ public interface BookingRepositoryCustom {
   List<Booking> findBookingCustomers(Long shopId);
 
   List<Booking> findLateCustomers(LocalDateTime now);
+
+  Booking findBookingByUserId(Long userId);
 }

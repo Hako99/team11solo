@@ -59,4 +59,7 @@ public class Booking extends Timestamp {
   public void noShow(){
     this.state = BookingType.NOSHOW;
   }
+  public void done(){
+    this.state = BookingType.DONE;
+  }
 }

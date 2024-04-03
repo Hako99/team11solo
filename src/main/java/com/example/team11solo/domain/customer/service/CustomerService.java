@@ -13,4 +13,6 @@ public interface CustomerService {
   void collingCustomer(CollingCustomerRequestDto collingCustomerRequestDto);
   @EventListener
   void noShowCustomer(NoShowEventRequestDto noShowEventRequestDto);
+
+  void doneCustomer (Long userId);
 }

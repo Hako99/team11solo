@@ -45,4 +45,16 @@ public class CustomerController {
         .build());
   }
 
+  // 손님 입장
+  @PostMapping("/{userId}")
+  public ResponseEntity<ResponseDto<Void>> doneCustomer(
+      @PathVariable Long userId
+  ){
+    customerService.doneCustomer(userId);
+    return ResponseEntity.ok().body(ResponseDto.<Void>builder()
+        .statusCode(HttpStatus.OK.value())
+        .data(null)
+        .build());
+  }
+
 }
