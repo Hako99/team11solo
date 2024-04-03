@@ -7,4 +7,5 @@ public interface BookingService {
 
   SseEmitter createBooking(BookingCreateRequestDto bookingCreateRequestDto);
 
+  void bookingCancle(Long bookingId);
 }
