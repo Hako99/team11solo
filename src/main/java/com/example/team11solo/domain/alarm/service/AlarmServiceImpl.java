@@ -61,4 +61,9 @@ public class AlarmServiceImpl implements AlarmService {
       throw new RuntimeException(e);
     }
   }
+  @Override
+  public void alarmClose(Long userId){
+    SseEmitter emitter = alarmSseEmitterRepository.get(userId);
+    emitter.complete();
+  }
 }

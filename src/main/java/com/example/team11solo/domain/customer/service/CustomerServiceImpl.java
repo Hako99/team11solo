@@ -46,9 +46,14 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Override
   public void noShowCustomer(NoShowEventRequestDto noShowEventRequestDto) {
-    List<Booking> lateBookings = bookingRepository.findLateCustomers(noShowEventRequestDto.getNow());
+    List<Booking> lateBookings = bookingRepository.findLateCustomers(
+        noShowEventRequestDto.getNow());
     for (Booking lateBooking : lateBookings) {
       lateBooking.noShow();
+      alarmService.sendMessage
+          (lateBooking.getUserId(),
+              lateBooking.getUserId() + "번 손님 입장 시간이 초과하여 입장 취소되었습니다.");
+      alarmService.alarmClose(lateBooking.getUserId());
     }
   }
 }

@@ -8,5 +8,6 @@ public interface AlarmService {
   SseEmitter createEmitter(Long userId);
   void sendToClient(Long userId, Object data);
   void sendMessage (Long userId, String message);
+   void alarmClose(Long userId);
 
 }
