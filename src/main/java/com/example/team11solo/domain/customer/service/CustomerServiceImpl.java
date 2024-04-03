@@ -71,7 +71,5 @@ public class CustomerServiceImpl implements CustomerService {
   public void wellDoneCustomer(Long userId) {
     Booking booking = bookingRepository.findDoneByUserId(userId);
     booking.wellDone();
-    bookingRepository.saveAndFlush(booking);
-    bookingRepository.delete(booking);
   }
 }
