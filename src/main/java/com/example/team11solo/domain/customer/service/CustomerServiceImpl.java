@@ -8,11 +8,8 @@ import com.example.team11solo.domain.customer.dto.request.CollingCustomerRequest
 import com.example.team11solo.domain.customer.dto.response.BookingCustomersResponseDto;
 import com.example.team11solo.global.dto.event.NoShowEventRequestDto;
 import jakarta.persistence.EntityNotFoundException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,9 +43,14 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Override
   public void noShowCustomer(NoShowEventRequestDto noShowEventRequestDto) {
-    List<Booking> lateBookings = bookingRepository.findLateCustomers(noShowEventRequestDto.getNow());
+    List<Booking> lateBookings = bookingRepository.findLateCustomers(
+        noShowEventRequestDto.getNow());
     for (Booking lateBooking : lateBookings) {
       lateBooking.noShow();
+      alarmService.sendMessage
+          (lateBooking.getUserId(),
+              lateBooking.getUserId() + "번 손님 입장 시간이 초과하여 입장 취소되었습니다.");
+      alarmService.alarmClose(lateBooking.getUserId());
     }
   }
 }
