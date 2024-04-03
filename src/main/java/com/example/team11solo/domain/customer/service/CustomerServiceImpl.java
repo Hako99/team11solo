@@ -6,9 +6,13 @@ import com.example.team11solo.domain.booking.entity.BookingType;
 import com.example.team11solo.domain.booking.repository.BookingRepository;
 import com.example.team11solo.domain.customer.dto.request.CollingCustomerRequestDto;
 import com.example.team11solo.domain.customer.dto.response.BookingCustomersResponseDto;
+import com.example.team11solo.global.dto.event.NoShowEventRequestDto;
 import jakarta.persistence.EntityNotFoundException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,5 +41,14 @@ public class CustomerServiceImpl implements CustomerService {
     alarmService.sendMessage
         (booking.getUserId(), booking.getUserId() + "번 손님 입장하여 주시기 바랍니다");
 
+  }
+
+
+  @Override
+  public void noShowCustomer(NoShowEventRequestDto noShowEventRequestDto) {
+    List<Booking> lateBookings = bookingRepository.findLateCustomers(noShowEventRequestDto.getNow());
+    for (Booking lateBooking : lateBookings) {
+      lateBooking.noShow();
+    }
   }
 }
