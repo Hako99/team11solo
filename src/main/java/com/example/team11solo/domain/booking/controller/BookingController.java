@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,12 +21,8 @@ public class BookingController {
 
   // 줄서기 시작
   @PostMapping
-  public ResponseEntity<ResponseDto<Void>> createBooking(@RequestBody BookingCreateRequestDto bookingCreateRequestDto) {
-    bookingService.createBooking(bookingCreateRequestDto);
-    return ResponseEntity.ok().body(ResponseDto.<Void>builder()
-        .statusCode(HttpStatus.OK.value())
-        .data(null)
-        .build());
+  public SseEmitter createBooking(@RequestBody BookingCreateRequestDto bookingCreateRequestDto) {
+    return bookingService.createBooking(bookingCreateRequestDto);
   }
 
 }
