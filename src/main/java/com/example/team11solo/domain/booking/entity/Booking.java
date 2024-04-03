@@ -20,7 +20,7 @@ import org.hibernate.annotations.SQLRestriction;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@SQLDelete(sql = "UPDATE Shop SET deleted_at = NOW() WHERE shop_id = ?")
+@SQLDelete(sql = "UPDATE Booking SET deleted_at = NOW() WHERE booking_id = ?")
 @SQLRestriction(value = "deleted_at is NULL")
 public class Booking extends Timestamp {
 
@@ -61,5 +61,9 @@ public class Booking extends Timestamp {
   }
   public void done(){
     this.state = BookingType.DONE;
+  }
+
+  public void wellDone() {
+    this.state = BookingType.WELLDONE;
   }
 }

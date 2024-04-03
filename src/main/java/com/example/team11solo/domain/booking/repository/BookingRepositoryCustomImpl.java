@@ -56,4 +56,14 @@ public class BookingRepositoryCustomImpl implements BookingRepositoryCustom{
         .where(booking.state.in(BookingType.COLLING))
         .fetchFirst();
   }
+
+  @Override
+  public Booking findDoneByUserId(Long userId) {
+    return jpaQueryFactory
+        .select(booking)
+        .from(booking)
+        .where(booking.userId.eq(userId))
+        .where(booking.state.in(BookingType.DONE))
+        .fetchFirst();
+  }
 }
