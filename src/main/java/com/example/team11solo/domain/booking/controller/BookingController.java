@@ -6,6 +6,7 @@ import com.example.team11solo.global.dto.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,18 @@ public class BookingController {
   @PostMapping
   public SseEmitter createBooking(@RequestBody BookingCreateRequestDto bookingCreateRequestDto) {
     return bookingService.createBooking(bookingCreateRequestDto);
+  }
+
+  // 줄서기 취소
+  @PostMapping("/{bookingId}")
+  public ResponseEntity<ResponseDto<Void>> bookingCancle(
+      @PathVariable Long bookingId
+  ){
+    bookingService.bookingCancle(bookingId);
+    return ResponseEntity.ok().body(ResponseDto.<Void>builder()
+        .statusCode(HttpStatus.OK.value())
+        .data(null)
+        .build());
   }
 
 }

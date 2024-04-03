@@ -66,4 +66,7 @@ public class Booking extends Timestamp {
   public void wellDone() {
     this.state = BookingType.WELLDONE;
   }
+  public void cancle(){
+    this.state = BookingType.CANCEL;
+  }
 }
