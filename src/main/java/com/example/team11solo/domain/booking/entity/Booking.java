@@ -56,4 +56,7 @@ public class Booking extends Timestamp {
   public void collingCustomer() {
     this.state = BookingType.COLLING;
   }
+  public void noShow(){
+    this.state = BookingType.NOSHOW;
+  }
 }
