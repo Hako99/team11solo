@@ -56,4 +56,14 @@ public class CustomerServiceImpl implements CustomerService {
       alarmService.alarmClose(lateBooking.getUserId());
     }
   }
+
+  @Override
+  public void doneCustomer(Long userId) {
+    Booking booking = bookingRepository.findBookingByUserId(userId);
+    booking.done();
+    alarmService.sendMessage
+        (booking.getUserId(),
+            booking.getUserId() + "번 손님이 입장완료 되었습니다.");
+    alarmService.alarmClose(booking.getUserId());
+  }
 }
