@@ -47,7 +47,7 @@ public class CustomerController {
   }
 
   // 손님 입장
-  @PostMapping("/{userId}")
+  @PostMapping("/in/{userId}")
   public ResponseEntity<ResponseDto<Void>> doneCustomer(
       @PathVariable Long userId
   ){
@@ -59,7 +59,7 @@ public class CustomerController {
   }
 
   // 손님 퇴장
-  @PostMapping("/{userId}")
+  @PostMapping("/out/{userId}")
   public ResponseEntity<ResponseDto<Void>> wellDoneCustomer(
       @PathVariable Long userId
   ){
