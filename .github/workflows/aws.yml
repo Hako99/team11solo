@@ -31,9 +31,12 @@ jobs:
 
       - name: Set up application.properties
         run: echo "${{ secrets.APPLICATION }}" > ./src/main/resources/application.properties
+        shell: bash
 
       - name: Build with Gradle
-        run: ./gradlew bootJar
+        run:  |
+          chmod +x ./gradlew
+          ./gradlew bootJar
 
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${{ env.DOCKER_IMAGE_NAME }}:latest
