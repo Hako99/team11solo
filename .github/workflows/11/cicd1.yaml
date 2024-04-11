@@ -13,6 +13,7 @@ env:
   EC2_HOST:
   EC2_SSH_USER: ec2-user
   PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/chargingpot
 
 jobs:
   build-and-push-docker:
@@ -46,6 +47,14 @@ jobs:
 
       - name: Push the Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/nginx:latest
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          push: true
+          tags: ${{ env.DOCKER_IMAGE }}:latest
 
       - name: Docker run
         run: |
