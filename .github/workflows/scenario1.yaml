@@ -1,0 +1,35 @@
+#트리거 구성
+name: scenario1
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+    branches: [dev]
+    paths:
+    - 'src/**'
+
+jobs:
+  #테스트
+  test:
+    if: github.event.action == 'opened' || github.event.action == 'synchronize'
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+
+  #이미지빌드
+  image-build:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+  #디플로이
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [image-build]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+
