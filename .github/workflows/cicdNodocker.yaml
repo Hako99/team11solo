@@ -17,7 +17,7 @@ on:
 #  CODE_DEPLOY_APP_NAME: CodeDeploy 애플리케이션 이름
 #  DEPLOYMENT_GROUP_NAME: CodeDeploy 배포그룹이름
 env:
-  PROJECT_NAME: plug-project
+  PROJECT_NAME: team11solo
   BUCKET_NAME: tabling-solo
   CODE_DEPLOY_APP_NAME: plug_cicd
   DEPLOYMENT_GROUP_NAME: tabling_solo
