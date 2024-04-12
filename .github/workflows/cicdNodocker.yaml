@@ -20,7 +20,7 @@ env:
   PROJECT_NAME: plug-project
   BUCKET_NAME: tabling-solo
   CODE_DEPLOY_APP_NAME: plug_cicd
-  DEPLOYMENT_GROUP_NAME: plug_instance
+  DEPLOYMENT_GROUP_NAME: tabling_solo
 #------------------------------------------------
 
 
