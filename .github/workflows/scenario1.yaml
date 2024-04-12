@@ -28,13 +28,7 @@ jobs:
           ${{ runner.os }}-node-
     - name: Install dependencies
       run: |
-          if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-          npm ci
-          else
-          npm i
-          fi
+        npm ci
     - name: npm build
       run: |
         npm run build
