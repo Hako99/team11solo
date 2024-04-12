@@ -47,8 +47,8 @@ jobs:
         run: chmod +x ./gradlew
         shell: bash
 
-      # 스프링 프로젝트의 빌드도구인 gradle을 통해 빌드하는 설정입니다.
-      - name: Gradle로 빌드
-        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-        with:
-          arguments: build
+
+
+      - name: 빌드
+        run: |
+          ./gradlew build
