@@ -28,9 +28,11 @@ jobs:
           ${{ runner.os }}-node-
     - name: Install dependencies
       run: |
+        cd my-app
         npm ci
     - name: npm build
       run: |
+        cd my-app
         npm run build
 
   #이미지빌드
