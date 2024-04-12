@@ -51,15 +51,11 @@ jobs:
           distribution: 'temurin'
 
       # Gradle 스크립트 실행 전 실행 권한을 부여합니다.
-      - name: gradlew 권한 부여
-        run: chmod +x ./gradlew
-        shell: bash
+      - name: gradlew 권한 부여, 빌드
+        run:  |
+          chmod +x ./gradlew
+          ./gradlew bootJar
 
-      # 스프링 프로젝트의 빌드도구인 gradle을 통해 빌드하는 설정입니다.
-      - name: Gradle로 빌드
-        uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
-        with:
-          arguments: build
 
       #------------------------------------------------
 
